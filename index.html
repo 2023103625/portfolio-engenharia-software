@@ -4,552 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ana Xavier - Portfólio Engenharia de Software</title>
-    <style>
-        :root {
-            --primary-color: #1f3433;
-            --secondary-color: #32808d;
-            --accent-color: #2ea4b2;
-            --text-dark: #1f3433;
-            --text-light: #626c71;
-            --background: #fafaf9;
-            --surface: #ffffff;
-            --border: #e5e5e5;
-            --success: #4caf50;
-            --warning: #ff9800;
-            --edit-border: #ff6b6b;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--background);
-        }
-
-        .portfolio-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        .portfolio-header {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 2rem 0;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .portfolio-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .portfolio-subtitle {
-            font-size: 1.4rem;
-            color: var(--secondary-color);
-            font-weight: 400;
-            margin-bottom: 1rem;
-        }
-
-        .portfolio-meta {
-            color: var(--text-light);
-            font-size: 1rem;
-            line-height: 1.4;
-        }
-
-        .docentes {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        /* Sections */
-        .portfolio-section {
-            background: var(--surface);
-            margin-bottom: 1.5rem;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--accent-color);
-        }
-
-        .section-subtitle {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin: 1.5rem 0 1rem 0;
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline:before {
-            content: '';
-            position: absolute;
-            left: 0.5rem;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--accent-color);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-            padding-left: 2rem;
-        }
-
-        .timeline-item:before {
-            content: '';
-            position: absolute;
-            left: -0.5rem;
-            top: 0.5rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent-color);
-        }
-
-        .timeline-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-period {
-            color: var(--secondary-color);
-            font-weight: 500;
-            font-size: 0.9rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .timeline-content {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        .timeline-content ul {
-            padding-left: 1.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .timeline-content li {
-            margin-bottom: 0.25rem;
-        }
-
-        /* Grid layouts */
-        .objectives-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .objective-card {
-            background: var(--background);
-            padding: 1.5rem;
-            border-radius: 6px;
-            border-left: 4px solid var(--accent-color);
-        }
-
-        .objective-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Assessment grid */
-        .assessment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .assessment-item {
-            background: var(--background);
-            padding: 1.5rem;
-            border-radius: 6px;
-            text-align: center;
-            border: 2px solid var(--border);
-        }
-
-        .assessment-percentage {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .assessment-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .assessment-desc {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        /* Bibliography */
-        .bibliography-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .bibliography-list li {
-            background: var(--background);
-            margin-bottom: 0.5rem;
-            padding: 1rem;
-            border-radius: 4px;
-            border-left: 3px solid var(--accent-color);
-        }
-
-        .book-title {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .book-authors {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        /* Schedule table */
-        .schedule-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        .schedule-table th,
-        .schedule-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .schedule-table th {
-            background: var(--background);
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .schedule-table tr:hover {
-            background: rgba(46, 164, 178, 0.05);
-        }
-
-        .week-number {
-            font-weight: 600;
-            color: var(--secondary-color);
-        }
-
-        .delivery-date {
-            color: var(--warning);
-            font-weight: 600;
-        }
-
-        .exam-date {
-            color: var(--success);
-            font-weight: 600;
-        }
-
-        /* Template box - EDITABLE */
-        .template-box {
-            background: linear-gradient(135deg, rgba(46, 164, 178, 0.1), rgba(31, 52, 51, 0.05));
-            border: 2px solid var(--accent-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-            position: relative;
-        }
-
-        .template-box.editable {
-            border: 2px dashed var(--edit-border);
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.05), rgba(46, 164, 178, 0.05));
-        }
-
-        .edit-indicator {
-            position: absolute;
-            top: -10px;
-            right: 10px;
-            background: var(--edit-border);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .template-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .template-content {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        .template-content h4 {
-            color: var(--secondary-color);
-            margin: 1rem 0 0.5rem 0;
-            font-size: 1rem;
-        }
-
-        /* Editable fields */
-        .editable-field {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 0.5rem;
-            margin: 0.25rem 0;
-            min-height: 2rem;
-            cursor: text;
-            transition: all 0.2s ease;
-        }
-
-        .editable-field:hover {
-            background: rgba(255, 255, 255, 1);
-            border-color: var(--accent-color);
-        }
-
-        .editable-field:focus {
-            outline: none;
-            border-color: var(--edit-border);
-            background: rgba(255, 255, 255, 1);
-            box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.1);
-        }
-
-        .editable-field.large {
-            min-height: 4rem;
-        }
-
-        .editable-field.placeholder {
-            color: #999;
-            font-style: italic;
-        }
-
-        /* Edit controls */
-        .edit-controls {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-            text-align: right;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            margin-left: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--secondary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-color);
-        }
-
-        .btn-secondary {
-            background: var(--background);
-            color: var(--text-dark);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--border);
-        }
-
-        /* Weekly entries */
-        .weekly-entries {
-            margin-top: 2rem;
-        }
-
-        .weekly-entry {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-
-        .weekly-entry h5 {
-            color: var(--primary-color);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        /* Contact info */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .contact-item {
-            background: var(--background);
-            padding: 1rem;
-            border-radius: 6px;
-            text-align: center;
-        }
-
-        .contact-label {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-value a {
-            color: var(--secondary-color);
-            text-decoration: none;
-        }
-
-        .contact-value a:hover {
-            text-decoration: underline;
-        }
-
-        /* Progress indicator */
-        .progress-indicator {
-            background: var(--background);
-            border-radius: 6px;
-            padding: 1rem;
-            margin-top: 1rem;
-            text-align: center;
-        }
-
-        .progress-bar {
-            background: var(--border);
-            height: 6px;
-            border-radius: 3px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-
-        .progress-fill {
-            background: var(--accent-color);
-            height: 100%;
-            transition: width 0.3s ease;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .portfolio-container {
-                padding: 0 15px;
-            }
-            
-            .portfolio-title {
-                font-size: 2.2rem;
-            }
-            
-            .portfolio-section {
-                padding: 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 1.5rem;
-            }
-            
-            .objectives-grid,
-            .assessment-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .timeline {
-                padding-left: 1.5rem;
-            }
-            
-            .timeline-item {
-                padding-left: 1.5rem;
-            }
-
-            .template-box {
-                padding: 1rem;
-            }
-        }
-
-        /* Print styles */
-        @media print {
-            .portfolio-container {
-                max-width: none;
-                padding: 0;
-            }
-            
-            .portfolio-section {
-                break-inside: avoid;
-                box-shadow: none;
-                border: 1px solid #ddd;
-            }
-
-            .edit-controls,
-            .edit-indicator {
-                display: none;
-            }
-        }
-
-        /* Notification styles */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--success);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 1000;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="portfolio-container">
         <!-- Header -->
         <header class="portfolio-header">
             <h2 class="portfolio-subtitle">Portfólio Digital - Engenharia de Software</h2>
-            <h3 class="portfolio-title">Ana Maria Santos Xavier</h3>
+            
+            <!-- Profile Photo -->
+            <div class="profile-photo">
+                <img id="profile-img" src="images/profile.jpg" alt="Ana Maria Santos Xavier" class="profile-image">
+                <div class="photo-upload">
+                    <input type="file" id="photo-input" accept="image/*" style="display: none;">
+                    <button class="upload-btn" onclick="document.getElementById('photo-input').click()">
+                        📷 Alterar Foto
+                    </button>
+                </div>
+            </div>
+
+            <h1 class="portfolio-title">Ana Maria Santos Xavier</h1>
             <div class="portfolio-meta">
                 <strong>Disciplina:</strong> Engenharia de Software (6 ECTS)<br>
                 <strong>Universidade:</strong> Universidade dos Açores<br>
@@ -569,6 +43,73 @@
                     <div class="progress-fill" id="progress-fill" style="width: 20%"></div>
                 </div>
                 <p><strong>Próxima Entrega:</strong> Projeto (Entrega 1) - 23 setembro</p>
+            </div>
+        </section>
+
+        <!-- Meus Projetos - NOVA SECÇÃO -->
+        <section class="portfolio-section">
+            <h2 class="section-title">💻 Os Meus Projetos</h2>
+            <p>Esta secção contém todos os projetos desenvolvidos durante o curso, incluindo documentação, código fonte e apresentações.</p>
+
+            <!-- Upload de Projetos -->
+            <div class="project-upload">
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-icon">📁</div>
+                    <h3>Adicionar Novo Projeto</h3>
+                    <p>Arraste ficheiros aqui ou clique para selecionar</p>
+                    <input type="file" id="project-files" multiple accept=".pdf,.doc,.docx,.zip,.rar,.jpg,.jpeg,.png,.mp4,.pptx">
+                    <button class="btn btn-primary" onclick="document.getElementById('project-files').click()">
+                        Selecionar Ficheiros
+                    </button>
+                </div>
+
+                <div class="project-form" id="project-form" style="display: none;">
+                    <h4>Detalhes do Projeto</h4>
+                    <input type="text" id="project-name" placeholder="Nome do Projeto" required>
+                    <textarea id="project-description" placeholder="Descrição do projeto..." rows="4"></textarea>
+                    <select id="project-category">
+                        <option value="">Selecionar Categoria</option>
+                        <option value="UC Engenharia de Software">UC Engenharia de Software</option>
+                        <option value="Programação">Programação</option>
+                        <option value="Base de Dados">Base de Dados</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" onclick="cancelProject()">Cancelar</button>
+                        <button class="btn btn-primary" onclick="saveProject()">Guardar Projeto</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Projetos -->
+            <div class="projects-grid" id="projects-grid">
+                <!-- Projeto de exemplo -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h4>Projeto Vending Machine</h4>
+                        <span class="project-category">Programação</span>
+                    </div>
+                    <div class="project-description">
+                        Sistema de venda automática desenvolvido em Java utilizando princípios de POO.
+                    </div>
+                    <div class="project-files">
+                        <div class="file-item">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">VendingMachine.java</span>
+                            <button class="file-action" onclick="viewFile('exemplo')">Ver</button>
+                        </div>
+                        <div class="file-item">
+                            <span class="file-icon">📊</span>
+                            <span class="file-name">Documentação.pdf</span>
+                            <button class="file-action" onclick="viewFile('exemplo')">Ver</button>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <button class="btn btn-secondary btn-small" onclick="editProject('exemplo')">Editar</button>
+                        <button class="btn btn-secondary btn-small" onclick="deleteProject('exemplo')">Eliminar</button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -947,7 +488,7 @@
                 <div class="contact-item">
                     <div class="contact-label">GitHub</div>
                     <div class="contact-value">
-                        <a href="#" target="_blank">[Repositório do projeto]</a>
+                        <a href="https://github.com/2023103625" target="_blank">github.com/2023103625</a>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -969,335 +510,19 @@
         Reflexão guardada com sucesso!
     </div>
 
-    <script>
-        // Funcionalidade de edição e gestão das reflexões
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeEditableFields();
-            loadSavedReflections();
-            setupSmoothScrolling();
-            updateProgress();
-            
-            // Highlight semana atual na tabela
-            highlightCurrentWeek();
-        });
+    <!-- Modal para visualizar ficheiros -->
+    <div class="modal" id="file-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Visualizar Ficheiro</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Conteúdo do ficheiro aparecerá aqui -->
+            </div>
+        </div>
+    </div>
 
-        // Inicializar campos editáveis
-        function initializeEditableFields() {
-            const editableFields = document.querySelectorAll('.editable-field');
-            
-            editableFields.forEach(field => {
-                // Placeholder functionality
-                if (field.textContent.trim() === '') {
-                    field.classList.add('placeholder');
-                    field.textContent = field.dataset.placeholder || 'Clique para editar...';
-                }
-
-                field.addEventListener('focus', function() {
-                    if (this.classList.contains('placeholder')) {
-                        this.textContent = '';
-                        this.classList.remove('placeholder');
-                    }
-                });
-
-                field.addEventListener('blur', function() {
-                    if (this.textContent.trim() === '') {
-                        this.classList.add('placeholder');
-                        this.textContent = this.dataset.placeholder || 'Clique para editar...';
-                    }
-                });
-
-                // Auto-save on content change
-                field.addEventListener('input', function() {
-                    autoSave();
-                });
-            });
-        }
-
-        // Auto-save functionality
-        let autoSaveTimer;
-        function autoSave() {
-            clearTimeout(autoSaveTimer);
-            autoSaveTimer = setTimeout(() => {
-                const templateData = gatherTemplateData();
-                localStorage.setItem('currentReflection', JSON.stringify(templateData));
-            }, 2000);
-        }
-
-        // Recolher dados do template
-        function gatherTemplateData() {
-            const fields = document.querySelectorAll('.editable-field');
-            const data = {};
-            
-            fields.forEach((field, index) => {
-                const content = field.classList.contains('placeholder') ? '' : field.textContent.trim();
-                data[`field_${index}`] = content;
-            });
-            
-            data.timestamp = new Date().toISOString();
-            return data;
-        }
-
-        // Guardar reflexão
-        function saveReflection() {
-            const templateData = gatherTemplateData();
-            const weekTitle = document.querySelector('.template-title .editable-field').textContent.trim();
-            
-            if (!weekTitle || weekTitle.includes('Clique para editar')) {
-                alert('Por favor, preencha pelo menos o título da semana antes de guardar.');
-                return;
-            }
-
-            // Guardar no localStorage
-            let savedReflections = JSON.parse(localStorage.getItem('savedReflections') || '[]');
-            
-            // Verificar se já existe uma reflexão para esta semana
-            const existingIndex = savedReflections.findIndex(r => r.title === weekTitle);
-            
-            const reflectionData = {
-                id: existingIndex >= 0 ? savedReflections[existingIndex].id : Date.now(),
-                title: weekTitle,
-                data: templateData,
-                savedAt: new Date().toISOString()
-            };
-
-            if (existingIndex >= 0) {
-                savedReflections[existingIndex] = reflectionData;
-            } else {
-                savedReflections.push(reflectionData);
-            }
-
-            localStorage.setItem('savedReflections', JSON.stringify(savedReflections));
-            
-            // Mostrar notificação
-            showNotification('Reflexão guardada com sucesso!');
-            
-            // Recarregar as reflexões guardadas
-            loadSavedReflections();
-            
-            // Atualizar data de última atualização
-            updateLastUpdate();
-        }
-
-        // Carregar reflexões guardadas
-        function loadSavedReflections() {
-            const savedReflections = JSON.parse(localStorage.getItem('savedReflections') || '[]');
-            const container = document.getElementById('weekly-entries');
-            
-            if (savedReflections.length === 0) {
-                container.innerHTML = '<h3 class="section-subtitle">Reflexões Guardadas</h3><p style="color: var(--text-light); text-align: center; padding: 2rem;">Nenhuma reflexão guardada ainda. Use o template acima para criar a sua primeira reflexão.</p>';
-                return;
-            }
-
-            let html = '<h3 class="section-subtitle">Reflexões Guardadas</h3>';
-            
-            savedReflections.reverse().forEach(reflection => {
-                const savedDate = new Date(reflection.savedAt).toLocaleDateString('pt-PT');
-                html += `
-                    <div class="weekly-entry">
-                        <h5>${reflection.title} <span style="font-weight: normal; color: var(--text-light); font-size: 0.9rem;">(guardado em ${savedDate})</span></h5>
-                        <div class="reflection-content" style="font-size: 0.95rem; line-height: 1.6;">
-                            ${formatReflectionContent(reflection.data)}
-                        </div>
-                        <div style="margin-top: 1rem; text-align: right;">
-                            <button class="btn btn-secondary" onclick="editReflection(${reflection.id})" style="font-size: 0.8rem;">Editar</button>
-                            <button class="btn btn-secondary" onclick="deleteReflection(${reflection.id})" style="font-size: 0.8rem; background: var(--edit-border); color: white;">Eliminar</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-        }
-
-        // Formatar conteúdo da reflexão para exibição
-        function formatReflectionContent(data) {
-            const labels = [
-                'Semana/Data',
-                'Recursos Consultados',
-                'Tipo de Aula',
-                'Conceitos-Chave Aprendidos',
-                'Reflexão Crítica',
-                'Atividades Práticas Realizadas',
-                'Ligações Interdisciplinares',
-                'Preparação para Avaliação',
-                'Objetivos para Próxima Semana',
-                'Recursos Úteis Descobertos'
-            ];
-
-            let html = '';
-            Object.keys(data).forEach((key, index) => {
-                if (key !== 'timestamp' && data[key] && !data[key].includes('Clique para editar')) {
-                    html += `<p><strong>${labels[index] || 'Campo ' + (index + 1)}:</strong><br>${data[key].replace(/\n/g, '<br>')}</p>`;
-                }
-            });
-
-            return html;
-        }
-
-        // Editar reflexão existente
-        function editReflection(id) {
-            const savedReflections = JSON.parse(localStorage.getItem('savedReflections') || '[]');
-            const reflection = savedReflections.find(r => r.id === id);
-            
-            if (reflection) {
-                // Carregar dados no template
-                const fields = document.querySelectorAll('.editable-field');
-                Object.keys(reflection.data).forEach((key, index) => {
-                    if (fields[index] && reflection.data[key]) {
-                        fields[index].textContent = reflection.data[key];
-                        fields[index].classList.remove('placeholder');
-                    }
-                });
-
-                // Scroll para o template
-                document.getElementById('template-box').scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Eliminar reflexão
-        function deleteReflection(id) {
-            if (confirm('Tem a certeza que deseja eliminar esta reflexão?')) {
-                let savedReflections = JSON.parse(localStorage.getItem('savedReflections') || '[]');
-                savedReflections = savedReflections.filter(r => r.id !== id);
-                localStorage.setItem('savedReflections', JSON.stringify(savedReflections));
-                loadSavedReflections();
-                showNotification('Reflexão eliminada com sucesso!');
-            }
-        }
-
-        // Repor template
-        function resetTemplate() {
-            if (confirm('Tem a certeza que deseja limpar todos os campos?')) {
-                const fields = document.querySelectorAll('.editable-field');
-                fields.forEach(field => {
-                    field.textContent = field.dataset.placeholder || 'Clique para editar...';
-                    field.classList.add('placeholder');
-                });
-                localStorage.removeItem('currentReflection');
-                showNotification('Template reposto!');
-            }
-        }
-
-        // Adicionar nova entrada semanal
-        function addWeeklyEntry() {
-            // Primeiro, guardar a reflexão atual se tiver conteúdo
-            const hasContent = Array.from(document.querySelectorAll('.editable-field'))
-                .some(field => !field.classList.contains('placeholder') && field.textContent.trim());
-            
-            if (hasContent) {
-                const shouldSave = confirm('Deseja guardar a reflexão atual antes de criar uma nova?');
-                if (shouldSave) {
-                    saveReflection();
-                }
-            }
-
-            // Limpar template para nova entrada
-            resetTemplate();
-            
-            // Auto-incrementar semana
-            const currentWeek = getCurrentWeekNumber();
-            const nextWeek = currentWeek + 1;
-            const nextDate = getNextWeekDate(currentWeek);
-            
-            const titleField = document.querySelector('.template-title .editable-field');
-            titleField.textContent = `Semana ${nextWeek} - ${nextDate} - [Tema a definir]`;
-            titleField.classList.remove('placeholder');
-            
-            // Scroll para o template
-            document.getElementById('template-box').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Auxiliares para gestão de semanas
-        function getCurrentWeekNumber() {
-            const startDate = new Date('2025-09-09'); // Início do semestre
-            const today = new Date();
-            const diffTime = Math.abs(today - startDate);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            return Math.ceil(diffDays / 7);
-        }
-
-        function getNextWeekDate(currentWeek) {
-            const startDate = new Date('2025-09-09');
-            const nextWeekDate = new Date(startDate);
-            nextWeekDate.setDate(startDate.getDate() + (currentWeek * 7));
-            return nextWeekDate.toLocaleDateString('pt-PT');
-        }
-
-        // Mostrar notificação
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
-        // Atualizar última atualização
-        function updateLastUpdate() {
-            document.getElementById('last-update').textContent = new Date().toLocaleDateString('pt-PT');
-        }
-
-        // Destacar semana atual
-        function highlightCurrentWeek() {
-            const currentWeekRow = document.querySelector('.current-week');
-            if (currentWeekRow) {
-                currentWeekRow.style.background = 'rgba(46, 164, 178, 0.1)';
-                currentWeekRow.style.borderLeft = '4px solid var(--accent-color)';
-            }
-        }
-
-        // Atualizar progresso
-        function updateProgress() {
-            const currentWeek = getCurrentWeekNumber();
-            const totalWeeks = 15;
-            const progress = Math.min((currentWeek / totalWeeks) * 100, 100);
-            
-            document.getElementById('current-week').textContent = `${currentWeek} de ${totalWeeks}`;
-            document.getElementById('progress-fill').style.width = `${progress}%`;
-        }
-
-        // Smooth scrolling
-        function setupSmoothScrolling() {
-            const links = document.querySelectorAll('a[href^="#"]');
-            
-            links.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
-
-        // Carregar dados salvos automaticamente na inicialização
-        function loadAutoSavedData() {
-            const autoSaved = localStorage.getItem('currentReflection');
-            if (autoSaved) {
-                const data = JSON.parse(autoSaved);
-                const fields = document.querySelectorAll('.editable-field');
-                
-                Object.keys(data).forEach((key, index) => {
-                    if (fields[index] && data[key] && !key.includes('timestamp')) {
-                        fields[index].textContent = data[key];
-                        if (data[key] !== '') {
-                            fields[index].classList.remove('placeholder');
-                        }
-                    }
-                });
-            }
-        }
-
-        // Chamada inicial para carregar dados auto-salvos
-        setTimeout(loadAutoSavedData, 100);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
