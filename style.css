@@ -739,7 +739,6 @@ select.form-control {
 
 /* END PERPLEXITY DESIGN SYSTEM */
 :root {
-    /* Map original variables to design system tokens */
     --primary-color: var(--color-slate-900);
     --secondary-color: var(--color-teal-500);
     --accent-color: var(--color-teal-400);
@@ -751,6 +750,8 @@ select.form-control {
     --success: var(--color-success);
     --warning: var(--color-warning);
     --edit-border: var(--color-error);
+    --admin-color: var(--color-teal-600);
+    --admin-bg: rgba(var(--color-teal-600-rgb, 29, 116, 128), 0.1);
 }
 
 * {
@@ -773,6 +774,286 @@ body {
     padding: 0 var(--space-20);
 }
 
+/* === ADMIN SYSTEM === */
+
+/* Admin Access Button */
+.admin-access-btn {
+    position: fixed;
+    top: var(--space-20);
+    right: var(--space-20);
+    background: var(--admin-color);
+    color: var(--color-btn-primary-text);
+    padding: var(--space-12) var(--space-16);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    z-index: 1000;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--duration-normal) var(--ease-standard);
+    border: none;
+}
+
+.admin-access-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Login Modal */
+.login-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(var(--color-slate-900-rgb), 0.6);
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.login-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--color-surface);
+    padding: var(--space-32);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    min-width: 400px;
+    max-width: 90vw;
+    border: 1px solid var(--color-card-border);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: var(--space-32);
+}
+
+.login-header h3 {
+    color: var(--admin-color);
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-8);
+    font-weight: var(--font-weight-semibold);
+}
+
+.login-header p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.form-group label {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+}
+
+.form-group input {
+    padding: var(--space-12);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.form-group input:focus {
+    outline: var(--focus-outline);
+    border-color: var(--color-primary);
+    box-shadow: var(--focus-ring);
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--space-16);
+    justify-content: flex-end;
+    margin-top: var(--space-16);
+}
+
+.form-actions button {
+    padding: var(--space-12) var(--space-24);
+    border: none;
+    border-radius: var(--radius-base);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.form-actions button[type="submit"] {
+    background: var(--admin-color);
+    color: var(--color-btn-primary-text);
+}
+
+.form-actions button[type="submit"]:hover {
+    background: var(--color-teal-700);
+}
+
+.form-actions button[type="button"] {
+    background: var(--color-secondary);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.form-actions button[type="button"]:hover {
+    background: var(--color-secondary-hover);
+}
+
+/* Admin Panel */
+.admin-panel {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, var(--admin-color), var(--color-teal-700));
+    color: var(--color-btn-primary-text);
+    padding: var(--space-16);
+    z-index: 1000;
+    box-shadow: var(--shadow-lg);
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-16);
+}
+
+.admin-header h3 {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+}
+
+.admin-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-16);
+}
+
+.admin-status {
+    background: rgba(255, 255, 255, 0.2);
+    padding: var(--space-4) var(--space-12);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.btn-admin-exit {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--color-btn-primary-text);
+    border: none;
+    padding: var(--space-8) var(--space-16);
+    border-radius: var(--radius-base);
+    cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+    transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.btn-admin-exit:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.admin-actions {
+    display: flex;
+    gap: var(--space-16);
+    flex-wrap: wrap;
+}
+
+.btn-admin {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--color-btn-primary-text);
+    border: none;
+    padding: var(--space-8) var(--space-16);
+    border-radius: var(--radius-base);
+    cursor: pointer;
+    font-weight: var(--font-weight-medium);
+    transition: all var(--duration-fast) var(--ease-standard);
+    font-size: var(--font-size-sm);
+}
+
+.btn-admin:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+}
+
+/* Admin Only Elements */
+.admin-only {
+    display: none;
+}
+
+body.admin-mode .admin-only {
+    display: block;
+}
+
+body.admin-mode .admin-panel {
+    display: block;
+}
+
+body.admin-mode .portfolio-container {
+    margin-top: 120px;
+}
+
+/* Edit Mode */
+body.edit-mode .editable-section {
+    border: 2px dashed var(--edit-border);
+    padding: var(--space-8);
+    margin: var(--space-4) 0;
+    border-radius: var(--radius-sm);
+    position: relative;
+    cursor: text;
+    transition: all var(--duration-fast) var(--ease-standard);
+}
+
+body.edit-mode .editable-section:hover {
+    background: rgba(var(--color-error-rgb), 0.05);
+}
+
+body.edit-mode .editable-section[contenteditable="true"]:focus {
+    outline: none;
+    background: rgba(var(--color-error-rgb), 0.1);
+    border-style: solid;
+}
+
+body.edit-mode .editable-section:before {
+    content: "✏️";
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--edit-border);
+    color: var(--color-btn-primary-text);
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xs);
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+body.edit-mode .editable-section:hover:before {
+    opacity: 1;
+}
+
 /* Header */
 .portfolio-header {
     background: var(--color-surface);
@@ -782,20 +1063,38 @@ body {
     margin-bottom: var(--space-32);
 }
 
-/* Profile Photo - NOVA FUNCIONALIDADE */
+/* Enhanced Profile Photo Container */
+.profile-photo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-24);
+    margin: var(--space-32) 0;
+    padding: var(--space-32);
+    background: linear-gradient(135deg, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.05), rgba(var(--color-teal-500-rgb), 0.08));
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.1);
+    box-shadow: var(--shadow-lg);
+    transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.profile-photo-container:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
 .profile-photo {
-    margin: var(--space-24) 0;
     position: relative;
     display: inline-block;
 }
 
 .profile-image {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     border-radius: var(--radius-full);
     object-fit: cover;
-    border: 4px solid var(--color-primary);
-    box-shadow: var(--shadow-md);
+    border: 6px solid var(--accent-color);
+    box-shadow: var(--shadow-lg);
     transition: all var(--duration-normal) var(--ease-standard);
 }
 
@@ -804,57 +1103,84 @@ body {
     box-shadow: var(--shadow-lg);
 }
 
-/* Placeholder quando não há imagem */
+/* Photo Overlay - Admin Only */
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(var(--color-slate-900-rgb), 0.7);
+    border-radius: var(--radius-full);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-standard);
+}
+
+body.admin-mode .photo-overlay {
+    display: flex;
+    opacity: 0;
+}
+
+body.admin-mode .profile-photo:hover .photo-overlay {
+    opacity: 1;
+}
+
+.photo-upload-modern {
+    text-align: center;
+    color: var(--color-white);
+}
+
+.photo-upload-modern .upload-icon {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--space-8);
+}
+
+.photo-upload-modern p {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Placeholder para foto quando não existe */
 .profile-image[src*="profile.jpg"] {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-teal-500));
+    background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: var(--font-size-4xl);
-    color: var(--color-btn-primary-text);
+    color: var(--color-white);
 }
 
 .profile-image[src*="profile.jpg"]:before {
     content: "👤";
 }
 
-.photo-upload {
-    margin-top: var(--space-8);
+.photo-info {
+    text-align: center;
 }
 
-.upload-btn {
-    background: var(--color-teal-500);
-    color: var(--color-btn-primary-text);
-    border: none;
-    padding: var(--space-8) var(--space-16);
-    border-radius: var(--radius-full);
-    cursor: pointer;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    transition: all var(--duration-fast) var(--ease-standard);
-}
-
-.upload-btn:hover {
-    background: var(--color-primary-hover);
-    transform: translateY(-2px);
-}
-
-.upload-btn:focus-visible {
-    outline: none;
-    box-shadow: var(--focus-ring);
-}
-
-.portfolio-title {
+.photo-name {
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text);
+    color: var(--primary-color);
     margin-bottom: var(--space-8);
-    letter-spacing: var(--letter-spacing-tight);
+}
+
+.photo-role {
+    font-size: var(--font-size-lg);
+    color: var(--secondary-color);
+    font-weight: var(--font-weight-medium);
+    background: rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.1);
+    padding: var(--space-8) var(--space-24);
+    border-radius: var(--radius-full);
+    display: inline-block;
 }
 
 .portfolio-subtitle {
     font-size: var(--font-size-xl);
-    color: var(--color-teal-500);
+    color: var(--secondary-color);
     font-weight: var(--font-weight-normal);
     margin-bottom: var(--space-16);
 }
@@ -876,62 +1202,63 @@ body {
     background: var(--color-surface);
     margin-bottom: var(--space-24);
     padding: var(--space-32);
-    border-radius: var(--radius-base);
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--color-card-border);
 }
 
 .section-title {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text);
+    color: var(--primary-color);
     margin-bottom: var(--space-24);
     padding-bottom: var(--space-8);
-    border-bottom: 2px solid var(--color-primary);
+    border-bottom: 2px solid var(--accent-color);
     letter-spacing: var(--letter-spacing-tight);
 }
 
 .section-subtitle {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
-    color: var(--color-teal-500);
+    color: var(--secondary-color);
     margin: var(--space-24) 0 var(--space-16) 0;
 }
 
-/* Projetos Section - NOVA FUNCIONALIDADE */
+/* Projetos Section */
 .project-upload {
     margin-bottom: var(--space-32);
 }
 
 .upload-area {
-    border: 2px dashed var(--color-primary);
-    border-radius: var(--radius-base);
+    border: 2px dashed var(--accent-color);
+    border-radius: var(--radius-lg);
     padding: var(--space-32);
     text-align: center;
-    background: rgba(var(--color-teal-500-rgb), 0.05);
+    background: rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.05);
     transition: all var(--duration-normal) var(--ease-standard);
     cursor: pointer;
 }
 
 .upload-area:hover {
-    background: rgba(var(--color-teal-500-rgb), 0.1);
-    border-color: var(--color-teal-500);
+    background: rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.1);
+    border-color: var(--secondary-color);
 }
 
 .upload-area.dragover {
-    background: rgba(var(--color-teal-500-rgb), 0.15);
-    border-color: var(--color-text);
+    background: rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.15);
+    border-color: var(--primary-color);
 }
 
 .upload-icon {
     font-size: var(--font-size-4xl);
     margin-bottom: var(--space-16);
-    color: var(--color-primary);
+    color: var(--accent-color);
 }
 
 .upload-area h3 {
-    color: var(--color-text);
+    color: var(--primary-color);
     margin-bottom: var(--space-8);
+    font-weight: var(--font-weight-semibold);
 }
 
 .upload-area p {
@@ -942,8 +1269,9 @@ body {
 .project-form {
     background: var(--color-background);
     padding: var(--space-24);
-    border-radius: var(--radius-base);
+    border-radius: var(--radius-lg);
     margin-top: var(--space-16);
+    border: 1px solid var(--color-border);
 }
 
 .project-form input,
@@ -953,25 +1281,64 @@ body {
     padding: var(--space-12);
     margin-bottom: var(--space-16);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-base);
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
-    color: var(--color-text);
     background-color: var(--color-surface);
+    color: var(--color-text);
     transition: border-color var(--duration-fast) var(--ease-standard);
 }
 
 .project-form input:focus,
 .project-form textarea:focus,
 .project-form select:focus {
-    border-color: var(--color-primary);
     outline: var(--focus-outline);
-    outline-offset: 2px;
+    border-color: var(--color-primary);
+    box-shadow: var(--focus-ring);
 }
 
 .project-form textarea {
     resize: vertical;
     min-height: 100px;
+    font-family: var(--font-family-base);
+}
+
+.project-form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: var(--select-caret-light);
+    background-repeat: no-repeat;
+    background-position: right var(--space-12) center;
+    background-size: 16px;
+    padding-right: var(--space-32);
+}
+
+@media (prefers-color-scheme: dark) {
+    .project-form select {
+        background-image: var(--select-caret-dark);
+    }
+}
+
+[data-color-scheme="dark"] .project-form select {
+    background-image: var(--select-caret-dark);
+}
+
+[data-color-scheme="light"] .project-form select {
+    background-image: var(--select-caret-light);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin-bottom: var(--space-16);
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
 }
 
 .form-actions {
@@ -990,10 +1357,11 @@ body {
 
 .project-card {
     background: var(--color-background);
-    border: 1px solid var(--color-card-border);
-    border-radius: var(--radius-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
     padding: var(--space-24);
     transition: all var(--duration-normal) var(--ease-standard);
+    box-shadow: var(--shadow-sm);
 }
 
 .project-card:hover {
@@ -1009,14 +1377,14 @@ body {
 }
 
 .project-header h4 {
-    color: var(--color-text);
-    font-size: var(--font-size-lg);
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
     margin: 0;
     font-weight: var(--font-weight-semibold);
 }
 
 .project-category {
-    background: var(--color-primary);
+    background: var(--accent-color);
     color: var(--color-btn-primary-text);
     padding: var(--space-4) var(--space-12);
     border-radius: var(--radius-full);
@@ -1040,13 +1408,13 @@ body {
     padding: var(--space-8);
     margin-bottom: var(--space-8);
     background: var(--color-surface);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-card-border-inner);
+    border-radius: var(--radius-base);
+    border: 1px solid var(--color-card-border);
 }
 
 .file-icon {
     margin-right: var(--space-12);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
 }
 
 .file-name {
@@ -1056,11 +1424,11 @@ body {
 }
 
 .file-action {
-    background: var(--color-teal-500);
+    background: var(--secondary-color);
     color: var(--color-btn-primary-text);
     border: none;
     padding: var(--space-4) var(--space-12);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-base);
     cursor: pointer;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
@@ -1068,12 +1436,7 @@ body {
 }
 
 .file-action:hover {
-    background: var(--color-primary-hover);
-}
-
-.file-action:focus-visible {
-    outline: none;
-    box-shadow: var(--focus-ring);
+    background: var(--primary-color);
 }
 
 .project-actions {
@@ -1095,7 +1458,7 @@ body {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: var(--color-primary);
+    background: var(--accent-color);
 }
 
 .timeline-item {
@@ -1107,23 +1470,23 @@ body {
 .timeline-item:before {
     content: '';
     position: absolute;
-    left: calc(-1 * var(--space-8));
+    left: -var(--space-8);
     top: var(--space-8);
     width: 12px;
     height: 12px;
     border-radius: var(--radius-full);
-    background: var(--color-primary);
+    background: var(--accent-color);
 }
 
 .timeline-title {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text);
+    color: var(--primary-color);
     margin-bottom: var(--space-8);
 }
 
 .timeline-period {
-    color: var(--color-teal-500);
+    color: var(--secondary-color);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-sm);
     margin-bottom: var(--space-12);
@@ -1154,13 +1517,14 @@ body {
 .objective-card {
     background: var(--color-background);
     padding: var(--space-24);
-    border-radius: var(--radius-sm);
-    border-left: 4px solid var(--color-primary);
+    border-radius: var(--radius-base);
+    border-left: 4px solid var(--accent-color);
+    box-shadow: var(--shadow-xs);
 }
 
 .objective-title {
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text);
+    color: var(--primary-color);
     margin-bottom: var(--space-8);
 }
 
@@ -1175,21 +1539,22 @@ body {
 .assessment-item {
     background: var(--color-background);
     padding: var(--space-24);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-base);
     text-align: center;
-    border: 2px solid var(--color-border);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-xs);
 }
 
 .assessment-percentage {
     font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-bold);
-    color: var(--color-teal-500);
+    color: var(--secondary-color);
     margin-bottom: var(--space-8);
 }
 
 .assessment-title {
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text);
+    color: var(--primary-color);
     margin-bottom: var(--space-8);
 }
 
@@ -1208,13 +1573,14 @@ body {
     background: var(--color-background);
     margin-bottom: var(--space-8);
     padding: var(--space-16);
-    border-radius: var(--radius-sm);
-    border-left: 3px solid var(--color-primary);
+    border-radius: var(--radius-base);
+    border-left: 3px solid var(--accent-color);
+    box-shadow: var(--shadow-xs);
 }
 
 .book-title {
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text);
+    color: var(--primary-color);
 }
 
 .book-authors {
@@ -1239,48 +1605,49 @@ body {
 .schedule-table th {
     background: var(--color-background);
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text);
+    color: var(--primary-color);
+    font-size: var(--font-size-sm);
 }
 
 .schedule-table tr:hover {
-    background: rgba(var(--color-teal-500-rgb), 0.05);
+    background: rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.05);
 }
 
 .week-number {
     font-weight: var(--font-weight-semibold);
-    color: var(--color-teal-500);
+    color: var(--secondary-color);
 }
 
 .delivery-date {
-    color: var(--color-warning);
+    color: var(--warning);
     font-weight: var(--font-weight-semibold);
 }
 
 .exam-date {
-    color: var(--color-success);
+    color: var(--success);
     font-weight: var(--font-weight-semibold);
 }
 
 /* Template box - EDITABLE */
 .template-box {
-    background: linear-gradient(135deg, rgba(var(--color-teal-500-rgb), 0.1), rgba(var(--color-slate-900-rgb), 0.05));
-    border: 2px solid var(--color-primary);
-    border-radius: var(--radius-base);
+    background: linear-gradient(135deg, rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.1), rgba(var(--color-slate-900-rgb), 0.05));
+    border: 2px solid var(--accent-color);
+    border-radius: var(--radius-lg);
     padding: var(--space-24);
     margin-top: var(--space-16);
     position: relative;
 }
 
 .template-box.editable {
-    border: 2px dashed var(--color-error);
-    background: linear-gradient(135deg, rgba(var(--color-error-rgb), 0.05), rgba(var(--color-teal-500-rgb), 0.05));
+    border: 2px dashed var(--edit-border);
+    background: linear-gradient(135deg, rgba(var(--color-error-rgb), 0.05), rgba(var(--color-teal-400-rgb, 45, 166, 178), 0.05));
 }
 
 .edit-indicator {
     position: absolute;
     top: -10px;
     right: var(--space-10);
-    background: var(--color-error);
+    background: var(--edit-border);
     color: var(--color-btn-primary-text);
     padding: var(--space-4) var(--space-8);
     border-radius: var(--radius-full);
@@ -1292,7 +1659,7 @@ body {
 .template-title {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text);
+    color: var(--primary-color);
     margin-bottom: var(--space-16);
 }
 
@@ -1302,16 +1669,17 @@ body {
 }
 
 .template-content h4 {
-    color: var(--color-teal-500);
+    color: var(--secondary-color);
     margin: var(--space-16) 0 var(--space-8) 0;
     font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
 }
 
 /* Editable fields */
 .editable-field {
-    background: rgba(var(--color-surface), 0.8);
+    background: rgba(255, 255, 255, 0.8);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-base);
     padding: var(--space-8);
     margin: var(--space-4) 0;
     min-height: 2rem;
@@ -1321,15 +1689,14 @@ body {
 
 .editable-field:hover {
     background: var(--color-surface);
-    border-color: var(--color-primary);
+    border-color: var(--accent-color);
 }
 
 .editable-field:focus {
-    outline: var(--focus-outline);
-    outline-offset: 2px;
-    border-color: var(--color-error);
+    outline: none;
+    border-color: var(--edit-border);
     background: var(--color-surface);
-    box-shadow: 0 0 0 2px rgba(var(--color-error-rgb), 0.1);
+    box-shadow: var(--focus-ring);
 }
 
 .editable-field.large {
@@ -1352,37 +1719,31 @@ body {
 .btn {
     padding: var(--space-8) var(--space-16);
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-base);
     cursor: pointer;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
-    font-family: var(--font-family-base);
     transition: all var(--duration-fast) var(--ease-standard);
     margin-left: var(--space-8);
 }
 
-.btn:focus-visible {
-    outline: none;
-    box-shadow: var(--focus-ring);
-}
-
 .btn-primary {
-    background: var(--color-teal-500);
+    background: var(--secondary-color);
     color: var(--color-btn-primary-text);
 }
 
 .btn-primary:hover {
-    background: var(--color-primary-hover);
+    background: var(--primary-color);
 }
 
 .btn-secondary {
-    background: var(--color-background);
+    background: var(--color-secondary);
     color: var(--color-text);
     border: 1px solid var(--color-border);
 }
 
 .btn-secondary:hover {
-    background: var(--color-secondary);
+    background: var(--color-secondary-hover);
 }
 
 .btn-small {
@@ -1397,16 +1758,17 @@ body {
 
 .weekly-entry {
     background: var(--color-surface);
-    border: 1px solid var(--color-card-border);
-    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
     padding: var(--space-24);
     margin-bottom: var(--space-16);
     box-shadow: var(--shadow-xs);
 }
 
 .weekly-entry h5 {
-    color: var(--color-text);
+    color: var(--primary-color);
     font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
     margin-bottom: var(--space-16);
     border-bottom: 1px solid var(--color-border);
     padding-bottom: var(--space-8);
@@ -1423,19 +1785,21 @@ body {
 .contact-item {
     background: var(--color-background);
     padding: var(--space-16);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-base);
     text-align: center;
+    box-shadow: var(--shadow-xs);
 }
 
 .contact-label {
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text);
+    color: var(--primary-color);
     margin-bottom: var(--space-8);
 }
 
 .contact-value a {
-    color: var(--color-teal-500);
+    color: var(--secondary-color);
     text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .contact-value a:hover {
@@ -1446,22 +1810,23 @@ body {
 /* Progress indicator */
 .progress-indicator {
     background: var(--color-background);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-base);
     padding: var(--space-16);
     margin-top: var(--space-16);
     text-align: center;
+    box-shadow: var(--shadow-xs);
 }
 
 .progress-bar {
     background: var(--color-border);
     height: 6px;
-    border-radius: 3px;
+    border-radius: var(--radius-sm);
     overflow: hidden;
     margin: var(--space-16) 0;
 }
 
 .progress-fill {
-    background: var(--color-primary);
+    background: var(--accent-color);
     height: 100%;
     transition: width var(--duration-normal) var(--ease-standard);
 }
@@ -1475,17 +1840,19 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(var(--color-slate-900-rgb), 0.5);
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
     background-color: var(--color-surface);
     margin: 5% auto;
-    border-radius: var(--radius-base);
+    border-radius: var(--radius-lg);
     width: 80%;
     max-width: 900px;
     max-height: 80vh;
     overflow: auto;
+    border: 1px solid var(--color-card-border);
     box-shadow: var(--shadow-lg);
 }
 
@@ -1503,103 +1870,33 @@ body {
 
 .close {
     color: var(--color-text-secondary);
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-bold);
     cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-standard);
 }
 
 .close:hover {
     color: var(--color-text);
 }
 
-/* Responsive - Mobile Portrait */
-@media (max-width: 480px) {
-    .portfolio-container {
-        padding: 0 var(--space-12);
-    }
-    
-    .portfolio-title {
-        font-size: var(--font-size-2xl);
-    }
-    
-    .profile-image {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .portfolio-section {
-        padding: var(--space-16);
-        margin-bottom: var(--space-16);
-    }
-    
-    .section-title {
-        font-size: var(--font-size-xl);
-    }
-    
-    .objectives-grid,
-    .assessment-grid,
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-16);
-    }
-    
-    .timeline {
-        padding-left: var(--space-20);
-    }
-    
-    .timeline-item {
-        padding-left: var(--space-20);
-    }
-
-    .template-box {
-        padding: var(--space-12);
-    }
-
-    .project-card {
-        padding: var(--space-12);
-    }
-
-    .form-actions {
-        flex-direction: column;
-    }
-    
-    .btn {
-        width: 100%;
-        margin-left: 0;
-        margin-bottom: var(--space-8);
-    }
-    
-    .project-header {
-        flex-direction: column;
-        gap: var(--space-8);
-    }
-    
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .upload-area {
-        padding: var(--space-16);
-    }
-    
-    .upload-icon {
-        font-size: var(--font-size-3xl);
-    }
-}
-
-/* Responsive - Tablet */
+/* Responsive */
 @media (max-width: 768px) {
     .portfolio-container {
         padding: 0 var(--space-16);
     }
     
-    .portfolio-title {
-        font-size: var(--font-size-3xl);
+    .profile-photo-container {
+        padding: var(--space-24);
     }
     
     .profile-image {
-        width: 120px;
-        height: 120px;
+        width: 150px;
+        height: 150px;
+    }
+    
+    .photo-name {
+        font-size: var(--font-size-2xl);
     }
     
     .portfolio-section {
@@ -1607,7 +1904,7 @@ body {
     }
     
     .section-title {
-        font-size: var(--font-size-xl);
+        font-size: var(--font-size-2xl);
     }
     
     .objectives-grid,
@@ -1634,6 +1931,120 @@ body {
 
     .form-actions {
         flex-direction: column;
+    }
+
+    .admin-actions {
+        justify-content: center;
+    }
+    
+    .login-content {
+        min-width: 300px;
+        padding: var(--space-24);
+    }
+
+    .admin-access-btn {
+        top: var(--space-10);
+        right: var(--space-10);
+        padding: var(--space-8) var(--space-12);
+        font-size: var(--font-size-xs);
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-container {
+        padding: 0 var(--space-12);
+    }
+
+    .portfolio-section {
+        padding: var(--space-16);
+        margin-bottom: var(--space-16);
+    }
+
+    .profile-photo-container {
+        padding: var(--space-16);
+        gap: var(--space-16);
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .photo-name {
+        font-size: var(--font-size-xl);
+    }
+
+    .photo-role {
+        font-size: var(--font-size-base);
+        padding: var(--space-6) var(--space-16);
+    }
+
+    .section-title {
+        font-size: var(--font-size-xl);
+    }
+
+    .template-box {
+        padding: var(--space-12);
+    }
+
+    .project-card {
+        padding: var(--space-12);
+    }
+
+    .login-content {
+        min-width: 280px;
+        padding: var(--space-16);
+        margin: 10% var(--space-16);
+        width: calc(100% - 32px);
+    }
+
+    .admin-panel {
+        padding: var(--space-12);
+    }
+
+    .admin-actions {
+        gap: var(--space-8);
+    }
+
+    .btn-admin {
+        padding: var(--space-6) var(--space-12);
+        font-size: var(--font-size-xs);
+    }
+
+    .upload-area {
+        padding: var(--space-16);
+    }
+
+    .upload-icon {
+        font-size: var(--font-size-3xl);
+    }
+
+    .project-form {
+        padding: var(--space-16);
+    }
+
+    .timeline {
+        padding-left: var(--space-16);
+    }
+
+    .timeline-item {
+        padding-left: var(--space-16);
+    }
+
+    .schedule-table th,
+    .schedule-table td {
+        padding: var(--space-8);
+        font-size: var(--font-size-sm);
+    }
+
+    .assessment-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-12);
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-12);
     }
 }
 
@@ -1652,9 +2063,12 @@ body {
 
     .edit-controls,
     .edit-indicator,
-    .upload-btn,
-    .project-actions {
-        display: none;
+    .photo-overlay,
+    .project-actions,
+    .admin-panel,
+    .admin-access-btn,
+    .admin-only {
+        display: none !important;
     }
 }
 
@@ -1663,14 +2077,19 @@ body {
     position: fixed;
     top: var(--space-20);
     right: var(--space-20);
-    background: var(--color-success);
+    background: var(--success);
     color: var(--color-btn-primary-text);
     padding: var(--space-16) var(--space-24);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-base);
     box-shadow: var(--shadow-lg);
     transform: translateX(400px);
     transition: transform var(--duration-normal) var(--ease-standard);
     z-index: 1000;
+    font-weight: var(--font-weight-medium);
+}
+
+body.admin-mode .notification {
+    top: 140px;
 }
 
 .notification.show {
