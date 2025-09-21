@@ -7,29 +7,83 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Admin Panel - Hidden by default -->
+    <div class="admin-panel" id="admin-panel">
+        <div class="admin-header">
+            <h3>🛡️ Painel Administrativo</h3>
+            <div class="admin-controls">
+                <span class="admin-status">Administrador</span>
+                <button class="btn-admin-exit" onclick="exitAdminMode()">Sair do Admin</button>
+            </div>
+        </div>
+        <div class="admin-actions">
+            <button class="btn-admin" onclick="toggleEditMode()">
+                <span id="edit-mode-text">📝 Ativar Edição</span>
+            </button>
+            <button class="btn-admin" onclick="exportData()">📤 Exportar Dados</button>
+            <button class="btn-admin" onclick="importData()">📥 Importar Dados</button>
+            <button class="btn-admin" onclick="clearAllData()" style="background: #ff6b6b;">🗑️ Limpar Tudo</button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="login-modal">
+        <div class="login-content">
+            <div class="login-header">
+                <h3>🔐 Acesso Administrativo</h3>
+                <p>Insira as credenciais de administrador</p>
+            </div>
+            <form class="login-form" onsubmit="return handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Utilizador:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeLoginModal()">Cancelar</button>
+                    <button type="submit">Entrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Access Button (Fixed) -->
+    <div class="admin-access-btn" onclick="showLoginModal()">
+        🔑 Admin
+    </div>
+
     <div class="portfolio-container">
         <!-- Header -->
         <header class="portfolio-header">
-            <h2 class="portfolio-subtitle">Portfólio Digital - Engenharia de Software</h2>
+            <h2 class="portfolio-subtitle editable-section" data-section="header-subtitle">Portfólio Digital - Engenharia de Software</h2>
             
-            <!-- Profile Photo -->
-            <div class="profile-photo">
-                <img id="profile-img" src="images/profile.jpg" alt="Ana Maria Santos Xavier" class="profile-image">
-                <div class="photo-upload">
+            <!-- Profile Photo - Enhanced Design -->
+            <div class="profile-photo-container">
+                <div class="profile-photo">
+                    <img id="profile-img" src="images/profile.jpg" alt="Ana Maria Santos Xavier" class="profile-image">
+                    <div class="photo-overlay" id="photo-overlay">
+                        <div class="photo-upload-modern">
+                            <div class="upload-icon">📷</div>
+                            <p>Clique para alterar foto</p>
+                        </div>
+                    </div>
                     <input type="file" id="photo-input" accept="image/*" style="display: none;">
-                    <button class="upload-btn" onclick="document.getElementById('photo-input').click()">
-                        📷 Alterar Foto
-                    </button>
+                </div>
+                <div class="photo-info">
+                    <div class="photo-name editable-section" data-section="name">Ana Maria Santos Xavier</div>
+                    <div class="photo-role">Estudante de Informática</div>
                 </div>
             </div>
 
-            <h1 class="portfolio-title">Ana Maria Santos Xavier</h1>
-            <div class="portfolio-meta">
+            <div class="portfolio-meta editable-section" data-section="header-meta">
                 <strong>Disciplina:</strong> Engenharia de Software (6 ECTS)<br>
                 <strong>Universidade:</strong> Universidade dos Açores<br>
                 <strong>Ano Letivo:</strong> 2025/2026
             </div>
-            <div class="docentes">
+            <div class="docentes editable-section" data-section="header-docentes">
                 <strong>Docentes:</strong> Prof.ª Hélia Guerra (Teóricas) | Prof. André Tavares (Práticas)
             </div>
         </header>
@@ -48,11 +102,11 @@
 
         <!-- Meus Projetos - NOVA SECÇÃO -->
         <section class="portfolio-section">
-            <h2 class="section-title">💻 Os Meus Projetos</h2>
-            <p>Esta secção contém todos os projetos desenvolvidos durante o curso, incluindo documentação, código fonte e apresentações.</p>
+            <h2 class="section-title editable-section" data-section="projects-title">💻 Os Meus Projetos</h2>
+            <p class="editable-section" data-section="projects-description">Esta secção contém todos os projetos desenvolvidos durante o curso, incluindo documentação, código fonte e apresentações.</p>
 
-            <!-- Upload de Projetos -->
-            <div class="project-upload">
+            <!-- Upload de Projetos - Admin Only -->
+            <div class="project-upload admin-only" id="project-upload">
                 <div class="upload-area" id="upload-area">
                     <div class="upload-icon">📁</div>
                     <h3>Adicionar Novo Projeto</h3>
@@ -75,6 +129,10 @@
                         <option value="Web Development">Web Development</option>
                         <option value="Outros">Outros</option>
                     </select>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="project-public" checked>
+                        <span>Permitir download público</span>
+                    </label>
                     <div class="form-actions">
                         <button class="btn btn-secondary" onclick="cancelProject()">Cancelar</button>
                         <button class="btn btn-primary" onclick="saveProject()">Guardar Projeto</button>
@@ -105,7 +163,7 @@
                             <button class="file-action" onclick="viewFile('exemplo')">Ver</button>
                         </div>
                     </div>
-                    <div class="project-actions">
+                    <div class="project-actions admin-only">
                         <button class="btn btn-secondary btn-small" onclick="editProject('exemplo')">Editar</button>
                         <button class="btn btn-secondary btn-small" onclick="deleteProject('exemplo')">Eliminar</button>
                     </div>
@@ -115,35 +173,37 @@
 
         <!-- Sobre o Portfólio -->
         <section class="portfolio-section">
-            <h2 class="section-title">📚 Sobre Este Portfólio</h2>
-            <p>Este portfólio digital serve como caderno de apontamentos pessoal e reflexão do meu percurso na UC Engenharia de Software. Aqui documento os resultados de aprendizagem, projetos, reflexões e evolução ao longo das diferentes temáticas abordadas na disciplina, seguindo rigorosamente a estrutura oficial do programa curricular.</p>
+            <h2 class="section-title editable-section" data-section="about-title">📚 Sobre Este Portfólio</h2>
+            <div class="editable-section" data-section="about-content">
+                <p>Este portfólio digital serve como caderno de apontamentos pessoal e reflexão do meu percurso na UC Engenharia de Software. Aqui documento os resultados de aprendizagem, projetos, reflexões e evolução ao longo das diferentes temáticas abordadas na disciplina, seguindo rigorosamente a estrutura oficial do programa curricular.</p>
+            </div>
             
-            <h3 class="section-subtitle">Objetivos da UC</h3>
+            <h3 class="section-subtitle editable-section" data-section="objectives-title">Objetivos da UC</h3>
             <div class="objectives-grid">
                 <div class="objective-card">
-                    <div class="objective-title">1. Visão Global do Desenvolvimento</div>
-                    <p>Adquirir princípios e conceitos do processo completo de desenvolvimento de software, desde levantamento de requisitos até entrega e manutenção</p>
+                    <div class="objective-title editable-section" data-section="obj1-title">1. Visão Global do Desenvolvimento</div>
+                    <p class="editable-section" data-section="obj1-content">Adquirir princípios e conceitos do processo completo de desenvolvimento de software, desde levantamento de requisitos até entrega e manutenção</p>
                 </div>
                 <div class="objective-card">
-                    <div class="objective-title">2. Integração de Conhecimentos</div>
-                    <p>Aplicar conhecimentos de Tecnologias Web e Bases de Dados no contexto do desenvolvimento de software</p>
+                    <div class="objective-title editable-section" data-section="obj2-title">2. Integração de Conhecimentos</div>
+                    <p class="editable-section" data-section="obj2-content">Aplicar conhecimentos de Tecnologias Web e Bases de Dados no contexto do desenvolvimento de software</p>
                 </div>
                 <div class="objective-card">
-                    <div class="objective-title">3. Engenharia Socio-técnica</div>
-                    <p>Compreender o desenvolvimento de software como atividade de engenharia que integra tecnologia com fatores sociais e humanos</p>
+                    <div class="objective-title editable-section" data-section="obj3-title">3. Engenharia Socio-técnica</div>
+                    <p class="editable-section" data-section="obj3-content">Compreender o desenvolvimento de software como atividade de engenharia que integra tecnologia com fatores sociais e humanos</p>
                 </div>
             </div>
         </section>
 
         <!-- Estrutura Curricular -->
         <section class="portfolio-section">
-            <h2 class="section-title">🗓️ Estrutura Curricular</h2>
+            <h2 class="section-title editable-section" data-section="curriculum-title">🗓️ Estrutura Curricular</h2>
             
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-title">🚀 Tema I - Introdução à Engenharia de Software</div>
+                    <div class="timeline-title editable-section" data-section="tema1-title">🚀 Tema I - Introdução à Engenharia de Software</div>
                     <div class="timeline-period">Semanas 1-2 (Set 9-22)</div>
-                    <div class="timeline-content">
+                    <div class="timeline-content editable-section" data-section="tema1-content">
                         <ul>
                             <li>A importância da Engenharia de Software</li>
                             <li>Conceito e definições fundamentais</li>
@@ -155,9 +215,9 @@
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-title">📋 Tema II - Processos e Gestão de Projetos</div>
+                    <div class="timeline-title editable-section" data-section="tema2-title">📋 Tema II - Processos e Gestão de Projetos</div>
                     <div class="timeline-period">Semanas 3-6 (Set 24 - Out 15)</div>
-                    <div class="timeline-content">
+                    <div class="timeline-content editable-section" data-section="tema2-content">
                         <strong>Subtema II.1 - Processos de Desenvolvimento:</strong>
                         <ul>
                             <li>Metodologias e sua importância</li>
@@ -177,9 +237,9 @@
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-title">🎯 Tema III - Requisitos e Desenho de Software</div>
+                    <div class="timeline-title editable-section" data-section="tema3-title">🎯 Tema III - Requisitos e Desenho de Software</div>
                     <div class="timeline-period">Semanas 7-10 (Out 22 - Nov 12)</div>
-                    <div class="timeline-content">
+                    <div class="timeline-content editable-section" data-section="tema3-content">
                         <strong>Subtema III.1 - Engenharia de Requisitos:</strong>
                         <ul>
                             <li>Conceitos e classificação de requisitos</li>
@@ -196,9 +256,9 @@
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-title">💻 Tema IV - Código, Testes e Manutenção</div>
+                    <div class="timeline-title editable-section" data-section="tema4-title">💻 Tema IV - Código, Testes e Manutenção</div>
                     <div class="timeline-period">Semanas 11-15 (Nov 17 - Dez 17)</div>
-                    <div class="timeline-content">
+                    <div class="timeline-content editable-section" data-section="tema4-content">
                         <strong>Subtema IV.1 - Escrita de Código:</strong>
                         <ul>
                             <li>Boas práticas e minimização de complexidade</li>
@@ -220,7 +280,7 @@
 
         <!-- Cronograma Detalhado -->
         <section class="portfolio-section">
-            <h2 class="section-title">📅 Cronograma Detalhado 2025/2026</h2>
+            <h2 class="section-title editable-section" data-section="schedule-title">📅 Cronograma Detalhado 2025/2026</h2>
             
             <table class="schedule-table">
                 <thead>
@@ -304,29 +364,29 @@
 
         <!-- Metodologia de Avaliação -->
         <section class="portfolio-section">
-            <h2 class="section-title">📊 Metodologia de Avaliação</h2>
+            <h2 class="section-title editable-section" data-section="assessment-title">📊 Metodologia de Avaliação</h2>
             
             <div class="assessment-grid">
                 <div class="assessment-item">
                     <div class="assessment-percentage">20%</div>
                     <div class="assessment-title">AC - Avaliação Contínua</div>
-                    <div class="assessment-desc">Resolução de problemas e questionários nas aulas</div>
+                    <div class="assessment-desc editable-section" data-section="ac-desc">Resolução de problemas e questionários nas aulas</div>
                 </div>
                 <div class="assessment-item">
                     <div class="assessment-percentage">40%</div>
                     <div class="assessment-title">P - Projeto em Grupo</div>
-                    <div class="assessment-desc">Aplicação Web + e-portfólio reflexivo</div>
+                    <div class="assessment-desc editable-section" data-section="p-desc">Aplicação Web + e-portfólio reflexivo</div>
                 </div>
                 <div class="assessment-item">
                     <div class="assessment-percentage">40%</div>
                     <div class="assessment-title">PE - Provas Escritas</div>
-                    <div class="assessment-desc">Frequências ou exame final</div>
+                    <div class="assessment-desc editable-section" data-section="pe-desc">Frequências ou exame final</div>
                 </div>
             </div>
             
             <div style="margin-top: 1.5rem; padding: 1rem; background: var(--background); border-radius: 6px;">
                 <strong>Critérios de Aprovação:</strong>
-                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;" class="editable-section" data-section="approval-criteria">
                     <li>Nota mínima de 10 valores em P e PE</li>
                     <li>Classificação final: 20%*AC + 40%*PE + 40%*P (se ambas >= 10)</li>
                 </ul>
@@ -335,7 +395,7 @@
 
         <!-- Bibliografia -->
         <section class="portfolio-section">
-            <h2 class="section-title">📖 Bibliografia de Referência</h2>
+            <h2 class="section-title editable-section" data-section="bibliography-title">📖 Bibliografia de Referência</h2>
             
             <h3 class="section-subtitle">Bibliografia Essencial</h3>
             <ul class="bibliography-list">
@@ -367,7 +427,7 @@
         </section>
 
         <!-- Template de Reflexão - SECÇÃO EDITÁVEL -->
-        <section class="portfolio-section">
+        <section class="portfolio-section admin-only">
             <h2 class="section-title">📝 Template de Reflexão Semanal</h2>
             
             <div class="template-box editable" id="template-box">
@@ -450,27 +510,37 @@
             </div>
         </section>
 
+        <!-- Reflexões Públicas - Visible to all -->
+        <section class="portfolio-section">
+            <h2 class="section-title">💭 Reflexões de Aprendizagem</h2>
+            <div id="public-reflections">
+                <!-- Reflexões públicas aparecerão aqui -->
+            </div>
+        </section>
+
         <!-- Reflexão Inicial -->
         <section class="portfolio-section">
-            <h2 class="section-title">💭 Reflexão Inicial - Expectativas e Objetivos</h2>
-            <p><em>Como estudante de Licenciatura em Informática no 3º ano, tenho expectativas elevadas relativamente à UC de Engenharia de Software. Tendo já adquirido bases sólidas em programação, bases de dados e tecnologias web, vejo esta disciplina como fundamental para integrar esses conhecimentos numa perspetiva mais ampla e profissional do desenvolvimento de software.</em></p>
-            
-            <h3 class="section-subtitle">Objetivos Pessoais para esta UC:</h3>
-            <ul style="padding-left: 1.5rem; color: var(--text-light);">
-                <li>Compreender como gerir projetos de software de forma eficaz</li>
-                <li>Dominar metodologias ágeis, especialmente Scrum</li>
-                <li>Aplicar padrões de design na prática</li>
-                <li>Desenvolver competências de trabalho em equipa</li>
-                <li>Preparar-me para o mercado de trabalho em desenvolvimento de software</li>
-            </ul>
+            <h2 class="section-title editable-section" data-section="initial-reflection-title">💭 Reflexão Inicial - Expectativas e Objetivos</h2>
+            <div class="editable-section" data-section="initial-reflection-content">
+                <p><em>Como estudante de Licenciatura em Informática no 3º ano, tenho expectativas elevadas relativamente à UC de Engenharia de Software. Tendo já adquirido bases sólidas em programação, bases de dados e tecnologias web, vejo esta disciplina como fundamental para integrar esses conhecimentos numa perspetiva mais ampla e profissional do desenvolvimento de software.</em></p>
+                
+                <h3 class="section-subtitle">Objetivos Pessoais para esta UC:</h3>
+                <ul style="padding-left: 1.5rem; color: var(--text-light);">
+                    <li>Compreender como gerir projetos de software de forma eficaz</li>
+                    <li>Dominar metodologias ágeis, especialmente Scrum</li>
+                    <li>Aplicar padrões de design na prática</li>
+                    <li>Desenvolver competências de trabalho em equipa</li>
+                    <li>Preparar-me para o mercado de trabalho em desenvolvimento de software</li>
+                </ul>
 
-            <p style="margin-top: 1rem;"><em>Espero que o projeto em grupo me permita aplicar todos os conceitos teóricos numa situação real, enfrentando os desafios típicos do desenvolvimento colaborativo de software. O e-portfólio reflexivo será uma ferramenta valiosa para documentar e analisar criticamente todo este processo de aprendizagem.</em></p>
+                <p style="margin-top: 1rem;"><em>Espero que o projeto em grupo me permita aplicar todos os conceitos teóricos numa situação real, enfrentando os desafios típicos do desenvolvimento colaborativo de software. O e-portfólio reflexivo será uma ferramenta valiosa para documentar e analisar criticamente todo este processo de aprendizagem.</em></p>
+            </div>
         </section>
 
         <!-- Contacto -->
         <section class="portfolio-section">
-            <h2 class="section-title">📞 Contacto e Partilha</h2>
-            <p>Este portfólio é partilhado com docentes, colegas de grupo e turma para discussões e peer review.</p>
+            <h2 class="section-title editable-section" data-section="contact-title">📞 Contacto e Partilha</h2>
+            <p class="editable-section" data-section="contact-description">Este portfólio é partilhado com docentes, colegas de grupo e turma para discussões e peer review.</p>
             
             <div class="contact-grid">
                 <div class="contact-item">
@@ -522,6 +592,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Data Import Input -->
+    <input type="file" id="data-import-input" accept=".json" style="display: none;">
 
     <script src="script.js"></script>
 </body>
